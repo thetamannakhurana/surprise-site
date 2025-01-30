@@ -3,7 +3,6 @@ body {
     background-color: #ffe6f2;
     text-align: center;
     padding: 20px;
-    transition: background-color 0.3s;
 }
 
 .container {
@@ -13,12 +12,10 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     display: inline-block;
     margin-top: 50px;
-    transition: transform 0.3s;
 }
 
 h1 {
     color: #ff66b2;
-    font-size: 2em;
 }
 
 input {
@@ -35,7 +32,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 button:hover {
@@ -46,7 +42,6 @@ button:hover {
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
-    color: #ff66b2;
 }
 
 .reminder {
@@ -62,27 +57,21 @@ button:hover {
     margin-top: 30px;
 }
 
-.game {
-    margin-top: 30px;
-    background-color: #fff3f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    display: none;
-}
-
-button {
+#puzzle-container {
+    margin-top: 20px;
     font-size: 1.2em;
-    padding: 12px 20px;
+    text-align: center;
 }
 
-button:active {
-    transform: scale(0.98);
-}
-
-#gameMessage {
-    font-size: 1.5em;
+#scrambled-word {
+    font-size: 2em;
     font-weight: bold;
     color: #ff66b2;
-    display: none;
+    margin: 20px;
+}
+
+input[type="text"] {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 10px;
 }
