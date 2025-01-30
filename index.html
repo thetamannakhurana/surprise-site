@@ -3,18 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Cutie 💖</title>
+    <title>Secret 💖</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome, Cutie! 💕</h1>
-        <p>Enter the secret password to unlock your surprise! 🔐</p>
-        <input type="password" id="passwordInput" placeholder="Enter password...">
-        <button onclick="checkPassword()">Unlock 💝</button>
-        <p id="errorMsg"></p>
+
+    <div id="password-container">
+        <h2>Enter Secret Word 🗝️</h2>
+        <input type="password" id="password-input" placeholder="Enter the secret...">
+        <button onclick="checkPassword()">Unlock 🔓</button>
+        <p id="wrong-pass" style="display:none; color: red;">Oops! Try again, cutie! 😘</p>
     </div>
+
+    <div id="main-content" style="display: none;">
+        <h1>Hey Cutie! 💖</h1>
+        <p>Today is not just any day... it's special because **YOU** are special! ✨</p>
+
+        <div class="countdown-box">
+            <h2>⏳ Countdown to 10 PM Surprise:</h2>
+            <p id="countdown"></p>
+        </div>
+
+        <div id="love-note" class="hidden">
+            <p>Just a little reminder that I love you more than anything! 😘💘</p>
+        </div>
+
+        <div id="message-box"></div>
+
+        <div class="love-letter">
+            <h3>💌 A Little Note for You:</h3>
+            <p>
+                My dearest Cutie,  
+                You make every single day so special, just by being **you**!  
+                I hope this little surprise brings a big smile to your face.  
+                Remember, today isn't over yet… there's still **one last surprise waiting!** 😏💕  
+                *Call me when you’re free!* 😘  
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
