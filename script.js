@@ -1,6 +1,6 @@
-// Countdown to 10 PM (22:00)
+// Countdown to 10 PM
 const targetTime = new Date();
-targetTime.setHours(22, 0, 0, 0); // Set the target time to 10:00 PM today
+targetTime.setHours(22, 0, 0, 0); 
 
 function updateCountdown() {
     const now = new Date();
@@ -12,45 +12,121 @@ function updateCountdown() {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         document.getElementById("countdown").innerText = `${hours}h ${minutes}m ${seconds}s left!`;
     } else {
-        document.getElementById("countdown").innerText = "It's time! 🎉";
+        document.getElementById("countdown").innerText = "It's time! 💖";
     }
 }
-
-// Update countdown every second
 setInterval(updateCountdown, 1000);
 
-// Initial call to update the countdown immediately
-updateCountdown();
+// Game 1: Catch the Hearts
+let heartsCaught = 0;
+let maxHearts = 5;
 
-// Function to show the correct game based on the time of day
-function showGame() {
-    const now = new Date();
-    const hour = now.getHours();
+function startCatchHeartsGame() {
+    const heartArea = document.getElementById("heartArea");
+    let heartCount = 0;
 
-    // Hide all games initially
-    document.querySelectorAll(".game").forEach(game => game.style.display = "none");
+    const heartInterval = setInterval(() => {
+        if (heartCount >= maxHearts) {
+            clearInterval(heartInterval);
+            return;
+        }
 
-    // Show the game based on the time of day
-    if (hour >= 8 && hour < 11) {
-        document.getElementById("game1").style.display = "block"; // 8 AM - 11 AM
-    } else if (hour >= 11 && hour < 14) {
-        document.getElementById("game2").style.display = "block"; // 11 AM - 2 PM
-    } else if (hour >= 14 && hour < 17) {
-        document.getElementById("game3").style.display = "block"; // 2 PM - 5 PM
-    } else if (hour >= 17 && hour < 19.5) {
-        document.getElementById("game4").style.display = "block"; // 5 PM - 7:30 PM
-    } else if (hour >= 19.5 && hour < 21) {
-        document.getElementById("game5").style.display = "block"; // 7:30 PM - 9 PM
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.position = "absolute";
+        heart.style.left = `${Math.random() * 90}%`;
+        heart.style.top = "-50px";
+        heart.style.fontSize = "30px";
+        heart.style.cursor = "pointer";
+        heart.style.transition = "top 2s linear";
+        heartArea.appendChild(heart);
+
+        setTimeout(() => {
+            heart.style.top = "100%";
+        }, 0);
+
+        heart.addEventListener("click", () => {
+            heartsCaught++;
+            heart.remove();
+            if (heartsCaught === maxHearts) {
+                clearInterval(heartInterval);
+                revealMessage();
+            }
+        });
+
+        heartCount++;
+    }, 1500);
+}
+
+// Game 3: Click Challenge
+let score = 0;
+
+function startClickChallengeGame() {
+    const clickArea = document.getElementById("clickArea");
+    const scoreDisplay = document.getElementById("score");
+
+    clickArea.addEventListener("click", () => {
+        score++;
+        scoreDisplay.innerText = score;
+        if (score >= 50) {
+            revealMessage();
+        }
+    });
+}
+
+// Game 4: Maze Game
+let playerPosition = { x: 10, y: 10 };
+
+function startMazeGame() {
+    const player = document.getElementById("player");
+
+    document.addEventListener("keydown", (event) => {
+        const moveDistance = 5;
+
+        if (event.key === "ArrowUp") playerPosition.y -= moveDistance;
+        if (event.key === "ArrowDown") playerPosition.y += moveDistance;
+        if (event.key === "ArrowLeft") playerPosition.x -= moveDistance;
+        if (event.key === "ArrowRight") playerPosition.x += moveDistance;
+
+        player.style.left = playerPosition.x + "px";
+        player.style.top = playerPosition.y + "px";
+
+        if (playerPosition.x >= 450 && playerPosition.x <= 470 &&
+            playerPosition.y >= 270 && playerPosition.y <= 290) {
+            revealMessage();
+        }
+    });
+}
+
+// Game 5: Word Puzzle
+const words = ["LOVE", "HAPPY", "CUTIE", "HEART", "SURPRISE"];
+let currentWord = "";
+let scrambledWord = "";
+
+function startWordPuzzleGame() {
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    scrambledWord = scrambleWord(currentWord);
+    document.getElementById("scrambled-word").innerText = scrambledWord;
+}
+
+function scrambleWord(word) {
+    const wordArray = word.split("");
+    for (let i = wordArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
+    }
+    return wordArray.join("");
+}
+
+function checkAnswer() {
+    const userInput = document.getElementById("user-input").value.toUpperCase();
+    if (userInput === currentWord) {
+        revealMessage();
+    } else {
+        alert("Oops! Try again!");
     }
 }
 
-// Call the function to show the correct game when the page loads
-showGame();
-
-// Function to reveal the next surprise message after the game is played
 function revealMessage() {
-    const message = "Here's your next surprise! 💌 Stay tuned!";
-    document.getElementById("gameMessage").innerText = message;
-    document.querySelectorAll(".game").forEach(game => game.style.display = "none"); // Hide games
-    document.getElementById("gameMessage").style.display = "block"; // Show the message
+    alert("You unlocked the next surprise!");
 }
