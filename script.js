@@ -1,63 +1,55 @@
 function checkPassword() {
-    const password = document.getElementById("passwordInput").value;
-    if (password === "cutiepie") {  // Change this to your own password!
-        window.location.href = "secret.html";
+    let password = document.getElementById("password-input").value;
+    if (password === "cutie") {
+        document.getElementById("password-container").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
     } else {
-        document.getElementById("errorMsg").innerText = "Wrong password, try again! 💔";
+        document.getElementById("wrong-pass").style.display = "block";
     }
 }
 
-// COUNTDOWN TIMER TO 10PM
+// Countdown Timer
 function updateCountdown() {
-    const targetTime = new Date();
-    targetTime.setHours(22, 0, 0, 0); // 10 PM today
-
+    const eventTime = new Date();
+    eventTime.setHours(22, 0, 0); // 10 PM
     const now = new Date();
-    const timeLeft = targetTime - now;
+    const diff = eventTime - now;
 
-    if (timeLeft <= 0) {
-        document.getElementById("timer").innerText = "It's time! Call me! ❤️";
-        return;
+    if (diff > 0) {
+        let hours = Math.floor(diff / (1000 * 60 * 60));
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById("countdown").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+    } else {
+        document.getElementById("countdown").innerHTML = "Time for your surprise! 🎉";
     }
+}
+setInterval(updateCountdown, 1000);
 
-    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+// Schedule Reminder Messages
+const messages = [
+    { time: "09:30", text: "Good morning, my cutest cutie! ☀️💖 Today is going to be full of little surprises, just like you fill my life with happiness. Keep that smile on! 😊💕" },
+    { time: "11:00", text: "Hey love, just a tiny reminder that today is special, but you don’t know why yet! 🤭 Keep wondering… and keep being adorable! 😘" },
+    { time: "14:00", text: "It’s the middle of the day, and I just wanted to remind you that you are the most special person ever! 💘 Hope you’re having a great time! 🎀" },
+    { time: "17:00", text: "The countdown is getting shorter! ⏳💖 Can you feel the excitement? Something sweet is waiting for you soon! 🥰" },
+    { time: "19:30", text: "A little more patience, my love! 💕 Just a couple of hours left until your heart melts (hopefully not literally 😆)! 😘" },
+    { time: "21:00", text: "The wait is OVER! Call me as soon as you're free, and let your final surprise begin! ✨💖 Can't wait to hear your voice! 😘" }
+];
 
-    document.getElementById("timer").innerText = `${hours}h ${minutes}m ${seconds}s left!`;
-    setTimeout(updateCountdown, 1000);
+function showMessages() {
+    const now = new Date();
+    const currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+    
+    messages.forEach((msg) => {
+        if (msg.time === currentTime) {
+            let messageBox = document.getElementById("message-box");
+            let messageDiv = document.createElement("div");
+            messageDiv.className = "love-note";
+            messageDiv.innerHTML = msg.text;
+            messageBox.appendChild(messageDiv);
+            messageDiv.style.display = "block";
+        }
+    });
 }
 
-// REMINDER POPUPS THROUGHOUT THE DAY
-function scheduleReminders() {
-    const reminders = [
-        { time: "10:00", message: "Good morning, Cutie! ☀️ Hope you have a great day! 💖" },
-        { time: "12:00", message: "Heyyy, don’t forget something special is happening today! 🎁" },
-        { time: "15:00", message: "It's afternoon! Just a lil reminder that I love you! 😘" },
-        { time: "18:00", message: "Evening vibes 🌆 Almost time for your final surprise! Excited? 💕" },
-        { time: "21:30", message: "30 minutes to go! ⏳ Get ready, Cutie! 💝" }
-    ];
-
-    function checkReminders() {
-        const now = new Date();
-        const currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-
-        reminders.forEach(reminder => {
-            if (reminder.time === currentTime) {
-                alert(reminder.message);
-            }
-        });
-
-        setTimeout(checkReminders, 60000); // Check every minute
-    }
-
-    checkReminders();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("timer")) {
-        updateCountdown();
-        scheduleReminders();
-    }
-});
-
+setInterval(showMessages, 60000);
