@@ -1,6 +1,6 @@
-// Countdown to 9 PM
+// Countdown to 10 PM
 const targetTime = new Date();
-targetTime.setHours(21, 0, 0, 0); 
+targetTime.setHours(22, 0, 0, 0); 
 
 function updateCountdown() {
     const now = new Date();
@@ -9,7 +9,8 @@ function updateCountdown() {
     if (diff > 0) {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("countdown").innerText = `${hours}h ${minutes}m left!`;
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById("countdown").innerText = `${hours}h ${minutes}m ${seconds}s left!`;
     } else {
         document.getElementById("countdown").innerText = "It's time! 💖";
     }
