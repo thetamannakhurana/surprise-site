@@ -25,7 +25,7 @@ function showReminders() {
 
     let message = "";
     if (hour === 10) message = "Good morning again, Cutie! 🌸 Hope your day is going great so far!";
-    if (hour === 11 && minute >= 30 && minute < 60) message = "Hey love! 💕 Just reminding you that I adore you!";
+    if (hour === 11 && minute >= 35 && minute < 60) message = "Hey love! 💕 Just reminding you that I adore you!";
     if (hour === 14) message = "Lunchtime hug! 🤗 Eat well, my Cutie!";
     if (hour === 17) message = "Evening reminder! 🌆 Can't wait to talk to you soon!";
     if (hour === 19 && minute >= 30 && minute < 60) message = "Almost time, Cutie! 🥰 Just a little longer!";
