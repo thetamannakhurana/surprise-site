@@ -1,72 +1,44 @@
-/* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Patrick Hand', cursive, sans-serif;
     text-align: center;
-    background-color: #ffe6f2;
+    background-color: #fff0f6;
     color: #ff4081;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
-/* Container for Login Page */
-.container {
-    margin-top: 50px;
+#password-container {
+    margin-top: 100px;
 }
 
-h1 {
-    font-size: 2.5rem;
-}
-
-p {
-    font-size: 1.2rem;
-}
-
-/* Input Box */
-input {
-    padding: 10px;
-    font-size: 1.2rem;
-    border: 2px solid #ff4081;
-    border-radius: 10px;
-    outline: none;
-    text-align: center;
-}
-
-button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #ff4081;
+.countdown-box {
+    background: #ff80ab;
     color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #ff1c62;
-}
-
-/* Secret Page Content */
-.content {
-    padding: 30px;
-}
-
-.letter {
-    margin-top: 20px;
-    padding: 20px;
-    background: white;
+    padding: 15px;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px pink;
-}
-
-.countdown {
+    display: inline-block;
     margin-top: 20px;
     font-size: 1.5rem;
-    font-weight: bold;
 }
 
-#timer {
-    font-size: 2rem;
-    color: #d81b60;
-    margin-top: 10px;
+.love-letter {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px pink;
+    display: inline-block;
+    max-width: 90%;
+    margin-top: 30px;
+}
+
+@keyframes floating-hearts {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.hidden {
+    display: none;
 }
