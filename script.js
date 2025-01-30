@@ -1,6 +1,6 @@
-// Countdown to 10 PM
+// Countdown to 10 PM (22:00)
 const targetTime = new Date();
-targetTime.setHours(22, 0, 0, 0);
+targetTime.setHours(22, 0, 0, 0); // Set the target time to 10:00 PM today
 
 function updateCountdown() {
     const now = new Date();
@@ -10,32 +10,47 @@ function updateCountdown() {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        document.getElementById("countdown").innerText = ${hours}h ${minutes}m ${seconds}s left!;
+        document.getElementById("countdown").innerText = `${hours}h ${minutes}m ${seconds}s left!`;
     } else {
-        document.getElementById("countdown").innerText = "It's time! 💖";
+        document.getElementById("countdown").innerText = "It's time! 🎉";
     }
 }
+
+// Update countdown every second
 setInterval(updateCountdown, 1000);
 
-// Timed messages
-function showReminders() {
+// Initial call to update the countdown immediately
+updateCountdown();
+
+// Function to show the correct game based on the time of day
+function showGame() {
     const now = new Date();
     const hour = now.getHours();
-    const minute = now.getMinutes();
 
-    let message = "";
-    if (hour === 10) message = "Good morning again, Cutie! 🌸 Hope your day is going great so far!";
-    if (hour === 11 && minute >= 35 && minute < 60) message = "Hey love! 💕 Just reminding you that I adore you!";
-    if (hour === 14) message = "Lunchtime hug! 🤗 Eat well, my Cutie!";
-    if (hour === 17) message = "Evening reminder! 🌆 Can't wait to talk to you soon!";
-    if (hour === 19 && minute >= 30 && minute < 60) message = "Almost time, Cutie! 🥰 Just a little longer!";
-    if (hour === 21) message = "It's time! 🎉 Call me now for your final surprise! 😘";
+    // Hide all games initially
+    document.querySelectorAll(".game").forEach(game => game.style.display = "none");
 
-    if (message) document.getElementById("reminder").innerText = message;
+    // Show the game based on the time of day
+    if (hour >= 8 && hour < 11) {
+        document.getElementById("game1").style.display = "block"; // 8 AM - 11 AM
+    } else if (hour >= 11 && hour < 14) {
+        document.getElementById("game2").style.display = "block"; // 11 AM - 2 PM
+    } else if (hour >= 14 && hour < 17) {
+        document.getElementById("game3").style.display = "block"; // 2 PM - 5 PM
+    } else if (hour >= 17 && hour < 19.5) {
+        document.getElementById("game4").style.display = "block"; // 5 PM - 7:30 PM
+    } else if (hour >= 19.5 && hour < 21) {
+        document.getElementById("game5").style.display = "block"; // 7:30 PM - 9 PM
+    }
 }
 
-// Run reminders immediately on page load
-showReminders();
+// Call the function to show the correct game when the page loads
+showGame();
 
-// Update reminders every minute
-setInterval(showReminders, 60000);
+// Function to reveal the next surprise message after the game is played
+function revealMessage() {
+    const message = "Here's your next surprise! 💌 Stay tuned!";
+    document.getElementById("gameMessage").innerText = message;
+    document.querySelectorAll(".game").forEach(game => game.style.display = "none"); // Hide games
+    document.getElementById("gameMessage").style.display = "block"; // Show the message
+}
